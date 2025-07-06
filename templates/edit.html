@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo List</title>
+    <title>ToDo List - Edit</title>
 </head>
 <body>
     <div class="task">
         <h1>Update Task</h1>
 
-        <form action="/edit/{{ tasks.key }}" method="POST">
-            <input type="text" name="task" id="task" value="{{ tasks.tasks }}">
+        <form action="/edit/{{ row.key }}" method="POST">
+            <input type="text" name="task" id="task" value="{{ row.tasks }}" required>
             <input type="submit" value="Edit">
         </form>
     </div>
