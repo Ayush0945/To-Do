@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>ToDo List</title>
+</head>
+
+<body>
+    <div class="content">
+        <h1>To-Do List</h1>
+
+        {% if row|length < 1 %}
+            <h3>There are no Tasks to do</h3>
+        {% else %}
+            <table border="1">
+                <tr>
+                    <th>Task</th>
+                    <th>Added</th>
+                    <th>Action</th>
+                </tr>
+                {% for i in row %}
+                <tr>
+                    <td>{{ i.tasks }}</td>
+                    <td>{{ i.time.strftime('%H:%M:%S') }}</td>
+                    <td>
+                        <a href="/remove/{{ i.key }}">Delete</a><br>
+                        <a href="/edit/{{ i.key }}">Update</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+
+        <form action="/" method="POST">
+            <input type="text" name="task" id="task" required>
+            <input type="submit" value="Add Task">
+        </form>
+    </div>
+</body>
+</html>
