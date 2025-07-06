@@ -54,4 +54,4 @@ def edit(key):
         return render_template("edit.html", row=row)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
