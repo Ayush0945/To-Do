@@ -19,25 +19,26 @@
             {% if tasks|length < 1 %}
                 <h3>There are no Tasks to do</h3>
             {% else %}
-                <table border="1">
+                <table border="1"cellspacing="0">
                     <tr>
+                        <th>Status</th>
                         <th>Task</th>
                         <th>Added</th>
                         <th>Action</th>
                     </tr>
                     {% for i in tasks %}
                     <tr>
-                        <td>{{ i.tasks }}</td>
+                        <td><a href="/complete/{{ i.key }}">{{ i.done }}</a></td>
+                        <td><a href="/edit/{{ i.key }}">{{ i.tasks }}</a></td>
                         <td>{{ i.time.strftime('%H:%M:%S') }}</td>
                         <td>
                             <a href="/remove/{{ i.key }}">Delete</a><br>
-                            <a href="/edit/{{ i.key }}">Update</a>
                         </td>
                     </tr>
                     {% endfor %}
                 </table>
             {% endif %}
-
+                <br>
             <form id="task-form" action="/" method="POST">
                 <input type="text" name="task" id="new-task" placeholder="Add a new task" required>
                 <button type="submit">Add</button>

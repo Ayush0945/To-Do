@@ -8,6 +8,7 @@ db = SQLAlchemy(app)
 
 class ToDo(db.Model):
     key = db.Column(db.Integer, primary_key = True)
+    done = db.Column(db.Boolean, default=False)
     tasks = db.Column(db.String(100), nullable = False)
     time = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -52,6 +53,16 @@ def edit(key):
             return "There was an error while updating your task"
     else:
         return render_template("edit.html", row=row)
+    
+@app.route("/complete/<int:key>")
+def done(key):
+    row = ToDo.query.get_or_404(key)
+    row.done = not row.done
 
+    try:
+        db.session.commit()
+        return redirect("/")
+    except:
+        return "There was an error while updating the task status"
 if __name__ == "__main__":
     app.run(debug=True)
