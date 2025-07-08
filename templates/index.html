@@ -19,18 +19,24 @@
             {% if tasks|length < 1 %}
                 <h3>There are no Tasks to do</h3>
             {% else %}
-                <table border="1"cellspacing="0">
+                <table border="1" cellspacing="0" cellpadding="10">
                     <tr>
-                        <th>Status</th>
+                        <th >Status</th>
                         <th>Task</th>
                         <th>Added</th>
                         <th>Action</th>
                     </tr>
                     {% for i in tasks %}
                     <tr>
-                        <td><a href="/complete/{{ i.key }}">{{ i.done }}</a></td>
+                        <td><a href="/complete/{{ i.key }}">
+                            {% if i.done%}
+                                ✅
+                            {% else %}
+                                ❌
+                            {% endif %}
+                        </a></td>
                         <td><a href="/edit/{{ i.key }}">{{ i.tasks }}</a></td>
-                        <td>{{ i.time.strftime('%H:%M:%S') }}</td>
+                        <td>{{ i.time.strftime('%H:%M') }}</td>
                         <td>
                             <a href="/remove/{{ i.key }}">Delete</a><br>
                         </td>
